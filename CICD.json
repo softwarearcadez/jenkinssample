@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "abbad9e2-eb0b-421c-a23f-54a50252585d",
+		"name": "CICD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Response Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e523288b-0d64-4e1e-bab0-1d14fd92b006",
+						"exec": [
+							"pm.test(\"Validate Response Code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 2000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Check value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var actualKeyValue = jsonData.home.Blocks[1].Entries[9].ItemListType;",
+							"    pm.expect(actualKeyValue).to.eql(\"DefaultOrScheduled\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Production}}/webdocs/cravetv_web/CraveTV/home.json",
+					"host": [
+						"{{Production}}"
+					],
+					"path": [
+						"webdocs",
+						"cravetv_web",
+						"CraveTV",
+						"home.json"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

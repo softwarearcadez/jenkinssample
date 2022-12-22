@@ -1,0 +1,10 @@
+[
+    {
+        "Scenario": "Validate the platform is web browser",
+        "expectedValue": "Web Browser"
+    },
+    {
+        "Scenario": "Validate the platform is not web browser",
+        "expectedValue":"WebBrowser"
+    }
+]

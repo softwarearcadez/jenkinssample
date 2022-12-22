@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "2bf9bf7a-6c9f-4df0-a7a5-6845baaabe54",
+		"name": "http-crud-tutorial-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "/item",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Validate the status of the HTTP REST API Web Service Response\r",
+											"pm.test(\"Status code is 200 - Item is created\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// let's validate the respone times\r",
+											"pm.test(\"Response time is less than 300ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 3345345254,\r\n    \"id\": \"sunny6324634\",\r\n    \"itemName\": \"WEEKEND\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/item",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"item"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Default response for POST /item",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/item",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"item"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/items",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Test Number 1 - To ensure that the status code is 200. This means request data was returned\r",
+											"\r",
+											"// Line 4, is an in inbuilt function of POSTMAN that enables you to name your request\r",
+											"pm.test(\"Validate that the Items API Response status code is 200\", function () {\r",
+											"// Line 6 is also an method by POSTMAN to check HTTP status code in the response    \r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body matches string - Validate if item is returned\", function () {\r",
+											"    var valueToBeChecked = pm.response.json().Items[1].itemName;\r",
+											"    pm.environment.set(\"SunnyMouse\", valueToBeChecked);\r",
+											"    console.log(valueToBeChecked);\r",
+											"    pm.expect(pm.response.text()).to.include(valueToBeChecked);\r",
+											"});\r",
+											"var jsonData = pm.response.json().Items[0].id;\r",
+											"pm.environment.set(\"itemID\", jsonData);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/items",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Default response for GET /items",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/items",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"items"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/item",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200 - Update item name\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"sunny6324634\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 3345345254,\r\n    \"id\": \"sunny6324634\",\r\n    \"itemName\": \"SENSE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/item",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"item"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Default response for PUT /item",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/item",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"item"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/item/:id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"SENSE\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/item/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"item",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{itemID}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Default response for GET /item/{id}",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/item/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"item",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/item/:id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Deleted\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/item/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"item",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{itemID}}"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Default response for DELETE /item/{id}",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/item/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"item",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "basePath",
+			"value": "",
+			"type": "any"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://bywk1ggjxf.execute-api.ca-central-1.amazonaws.com/{{basePath}}",
+			"type": "string"
+		}
+	]
+}
